@@ -1,21 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, h, type PropType } from 'vue'
+import { ref, computed, type PropType, inject, useSlots } from 'vue'
 
+// --- Props ---
 const props = defineProps({
   label: String,
   icon: String,
-  iconClass: {
-    type: String,
-    default: ''
-  },
-  iconPos: {
-    type: String,
-    default: 'left'
-  },
-  link: {
-    type: Boolean,
-    default: false
-  },
+  iconClass: { type: String, default: '' },
+  iconPos: { type: String, default: 'left' },
+  link: { type: Boolean, default: false },
   href: String,
   target: String,
   disabled: Boolean,
@@ -26,8 +18,15 @@ const props = defineProps({
     default: 'contained'
   },
   iconOnly: Boolean,
-  badge: [String, Number],
-  size: String,
+  badge: String,
+  buttonSize: {
+    type: String as PropType<'small' | 'normal' | 'large'>,
+    default: 'normal'
+  },
+  size: {
+    type: String as PropType<'small' | 'normal' | 'large'>,
+    default: 'normal'
+  },
   severity: {
     type: String,
     default: 'primary'
@@ -38,9 +37,15 @@ const props = defineProps({
   }
 })
 
+// --- Injeções & Slots ---
+const slots = useSlots()
+const inGroup = inject('inButtonGroup', false)
+
+// --- Model & Emits ---
 const modelLoading = defineModel<boolean>('loading')
 const emit = defineEmits(['click'])
 
+// --- Refs & Computeds ---
 const isLoadingInternally = ref(false)
 
 const isLoading = computed(() => {
@@ -49,18 +54,16 @@ const isLoading = computed(() => {
     : modelLoading?.value ?? false
 })
 
-const handleClick = async (e: Event) => {
-  if (props.disabled || isLoading.value) return
+const isVertical = computed(() => ['top', 'bottom'].includes(props.iconPos))
+const iconFirst = computed(() => props.iconPos === 'left' || props.iconPos === 'top')
 
-  emit('click', e)
+const isIconOnly = computed(() => {
+  return !!props.icon && !props.label && !slots.default
+})
 
-  if (props.autoLoading && modelLoading) {
-    modelLoading.value = true
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    modelLoading.value = false
-  }
-}
+const hasDefaultSlot = computed(() => !!slots.default)
 
+// --- Severidade / Variant ---
 type Severity =
   | 'primary' | 'secondary' | 'success' | 'info'
   | 'warn' | 'help' | 'danger' | 'contrast'
@@ -94,7 +97,6 @@ const severityVariants = computed(() => {
     }[severityKey]
   }
 
-  // contained (default)
   return {
     primary: 'bg-gray-950 hover:bg-gray-800 text-white',
     secondary: 'bg-gray-300 hover:bg-gray-400 text-gray-600',
@@ -107,60 +109,106 @@ const severityVariants = computed(() => {
   }[severityKey]
 })
 
+// --- Classes ---
+const sizeClass = computed(() => {
+  switch (props.buttonSize) {
+    case 'small': return 'h-8 px-3 text-sm'
+    case 'large': return 'h-11 px-5 text-lg'
+    default: return 'min-h-10 px-4 text-base'
+  }
+})
+
+const iconSizeClass = computed(() => {
+  const base = {
+    small: 'text-xs',
+    large: 'text-xl',
+    normal: 'text-base'
+  }[props.buttonSize] || 'text-base'
+
+  return `${base}`
+})
+
+const iconOnlySizeClass = computed(() => {
+  if (!isIconOnly.value) return ''
+  switch (props.buttonSize) {
+    case 'small': return 'w-8 h-8'
+    case 'large': return 'w-12 h-12'
+    default: return 'w-10 h-10'
+  }
+})
+
 const layoutClass = computed(() => {
-  return ['top', 'bottom'].includes(props.iconPos) ? 'flex-col gap-1' : 'flex-row gap-2'
+  return isVertical.value ? 'flex-col' : 'flex-row'
 })
 
-const buttonClasses = computed(() => {
-  return {
-    'inline-flex items-center justify-center transition-colors duration-200 cursor-pointer rounded': true,
-    [layoutClass.value]: true,
-    [severityVariants.value]: !props.link,
-    'opacity-50 !cursor-not-allowed': props.disabled || isLoading.value,
-    '!shadow-md/30': props.raised,
-    'rounded-full': props.rounded,
-    'w-10 h-10': props.iconOnly && !props.label,
-    'p-1 px-3': !(props.iconOnly && !props.label),
-    'text-sm px-2 py-1': props.size === 'small',
-    'text-lg px-4 py-2': props.size === 'large',
-    'bg-transparent text-black font-medium hover:underline hover:bg-white': props.link
+const buttonClasses = computed(() => ({
+  'inline-flex items-center justify-center transition-colors duration-200 cursor-pointer': true,
+  [severityVariants.value]: !props.link,
+  [sizeClass.value]: true,
+  [iconOnlySizeClass.value]: true,
+  'opacity-50 !cursor-not-allowed': props.disabled || isLoading.value,
+  '!shadow-md/30': props.raised,
+  'rounded-full': props.rounded,
+  'bg-transparent text-black font-medium hover:underline hover:bg-white': props.link,
+  'rounded': !props.rounded && !inGroup,
+  'border border-l-0 first:border-l': inGroup && props.variant !== 'text',
+  'first:rounded-l last:rounded-r rounded-none': inGroup,
+  '-ml-px first:ml-0': inGroup
+}))
+
+// --- Handlers ---
+const handleClick = async (e: Event) => {
+  if (props.disabled || isLoading.value) return
+
+  emit('click', e)
+
+  if (props.autoLoading && modelLoading) {
+    modelLoading.value = true
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    modelLoading.value = false
   }
-})
-
-const iconVNode = computed(() => {
-  if (isLoading.value) {
-    return h('span', {
-      class: 'pi pi-spinner animate-spin text-base'
-    })
-  }
-
-  if (!props.icon) return null
-
-  return h('i', {
-    class: `${props.icon} ${props.iconClass}`
-  })
-})
-
-const labelVNode = computed(() => {
-  return props.label ? h('span', {}, props.label) : null
-})
-
-const iconFirst = computed(() => {
-  return props.iconPos === 'left' || props.iconPos === 'top'
-})
+}
 </script>
 
 <template>
   <component
-    :class="buttonClasses"
     :is="props.href ? 'a' : 'button'"
     :href="props.href"
     :target="props.target"
     :disabled="props.disabled || isLoading"
+    :class="buttonClasses"
     @click="handleClick"
   >
-    <component :is="iconVNode" v-if="(props.icon || isLoading) && iconFirst" />
-    <component :is="labelVNode" v-if="labelVNode" />
-    <component :is="iconVNode" v-if="(props.icon || isLoading) && !iconFirst" />
+    <!-- 1. Ícone isolado -->
+    <template v-if="isIconOnly">
+      <span class="flex items-center justify-center w-full h-full">
+        <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
+      </span>
+    </template>
+
+    <!-- 2. Slot externo com conteúdo customizado -->
+    <template v-else-if="hasDefaultSlot">
+      <slot />
+    </template>
+
+    <!-- 3. Layout padrão: ícone + label -->
+    <template v-else>
+      <div :class="['flex items-center justify-center', layoutClass, isVertical ? 'gap-1' : 'gap-2']">
+        <span v-if="(props.icon || isLoading) && iconFirst">
+          <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
+        </span>
+
+        <span v-if="props.label">{{ props.label }}</span>
+
+        <span v-if="(props.icon || isLoading) && !iconFirst">
+          <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
+        </span>
+
+        <span v-if="props.badge" class="ml-2 bg-transparent text-black text-lg leading-none rounded-full px-2 py-0.5">
+          {{ props.badge }}
+        </span>
+
+      </div>
+    </template>
   </component>
 </template>
