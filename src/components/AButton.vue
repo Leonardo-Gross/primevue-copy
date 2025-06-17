@@ -204,7 +204,7 @@ const handleClick = async (e: Event) => {
           <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
         </span>
 
-        <span v-if="props.badge" class="ml-2 bg-transparent text-black text-lg leading-none rounded-full px-2 py-0.5">
+        <span v-if="props.badge" class="ml-2 bg-white text-black text-sm leading-none rounded-full px-2 py-0.5">
           {{ props.badge }}
         </span>
 
