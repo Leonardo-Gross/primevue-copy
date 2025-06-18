@@ -6,7 +6,13 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
 
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@Components": ["./src/components"],
+
+      "@Atoms": ["./src/components/atoms"],
+      "@Molecules": ["./src/components/molecules"],
+      "@Organisms": ["./src/components/organisms"],
+      "@Templates": ["./src/components/templates"],
     }
   }
 }
