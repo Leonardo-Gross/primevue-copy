@@ -1,41 +1,37 @@
 <script setup lang="ts">
-import { ref, computed, type PropType, inject, useSlots } from 'vue';
+import { ref, computed, inject, useSlots } from 'vue';
+import type { Position, Severity, Size, Variant } from './types';
+import { POSITION, SEVERITY, SIZE, VARIANT } from './types';
 
-// --- Props ---
-const props = defineProps({
-  label: String,
-  icon: String,
-  iconClass: { type: String, default: '' },
-  iconPos: { type: String, default: 'left' },
-  link: { type: Boolean, default: false },
-  href: String,
-  target: String,
-  disabled: Boolean,
-  raised: Boolean,
-  rounded: Boolean,
-  variant: {
-    type: String as PropType<'text' | 'outlined' | 'contained'>,
-    default: 'contained',
-  },
-  iconOnly: Boolean,
-  badge: String,
-  buttonSize: {
-    type: String as PropType<'small' | 'normal' | 'large'>,
-    default: 'normal',
-  },
-  size: {
-    type: String as PropType<'small' | 'normal' | 'large'>,
-    default: 'normal',
-  },
-  severity: {
-    type: String,
-    default: 'primary',
-  },
-  autoLoading: {
-    type: Boolean,
-    default: false,
-  },
-});
+const props = withDefaults(
+  defineProps<{
+    autoLoading?: boolean;
+    badge?: string;
+    buttonSize?: Size;
+    disabled?: boolean;
+    href?: string;
+    icon?: string;
+    iconClass?: string;
+    iconOnly?: boolean;
+    iconPos?: Position;
+    label?: string;
+    link?: boolean;
+    raised?: boolean;
+    rounded?: boolean;
+    severity?: Severity;
+    size?: Size;
+    target?: string;
+    variant?: Variant;
+  }>(),
+  {
+    buttonSize: SIZE.NORMAL,
+    iconClass: '',
+    iconPos: POSITION.LEFT,
+    severity: SEVERITY.PRIMARY,
+    size: SIZE.NORMAL,
+    variant: VARIANT.CONTAINED,
+  }
+);
 
 // --- Injeções & Slots ---
 const slots = useSlots();
@@ -62,20 +58,11 @@ const isIconOnly = computed(() => {
 const hasDefaultSlot = computed(() => !!slots.default);
 
 // --- Severidade / Variant ---
-type Severity =
-  | 'primary'
-  | 'secondary'
-  | 'success'
-  | 'info'
-  | 'warn'
-  | 'help'
-  | 'danger'
-  | 'contrast';
 
 const severityKey = (props.severity?.toLowerCase() ?? 'primary') as Severity;
 
 const severityVariants = computed(() => {
-  if (props.variant === 'text') {
+  if (props.variant === VARIANT.TEXT) {
     return {
       primary: 'text-gray-950 hover:bg-gray-100',
       secondary: 'text-gray-600 hover:bg-gray-100',

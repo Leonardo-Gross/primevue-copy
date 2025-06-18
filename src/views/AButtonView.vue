@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AButton from '../components/AButton.vue';
+import { AButton } from '@Components';
 import { ref } from 'vue';
 
 import ButtonGroup from '../components/ButtonGroup.vue';
