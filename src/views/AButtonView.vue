@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import AButton from '../components/AButton.vue'
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router';
 
 import ButtonGroup from '../components/ButtonGroup.vue';
+import ALayout from '@/components/ALayout.vue';
 
 const loading = ref(false)
 const currentSize = ref<'small' | 'normal' | 'large'>('normal')
@@ -16,30 +16,12 @@ const load = async () => {
   loading.value = false
 }
 
-const isSideBarOpen = ref(false)
-function toggleSideBar() {
-  isSideBarOpen.value = !isSideBarOpen.value
-}
-
 </script>
 
 <template>
   <div class="w-full h-screen p-10 bg-gray-100">
     <div>
-      <div class="flex justify-between items-center">
-        <h1 class="text-3xl font-bold">Button Component</h1>
-        <i @click="toggleSideBar" class="pi pi-plus"></i>
-      </div>
-      <div v-if="isSideBarOpen" class="p-2 bg-gray-400 text-white rounded-l-lg fixed top-0 right-0 h-full w-64 !p-4 shadow-lg">
-        <div class="flex justify-between items-baseline">
-          <h2 class="text-2xl font-bold mb-4">Components</h2>
-          <i @click="toggleSideBar" class="pi pi-times"></i>
-        </div>
-        <ul class="mt-10 ms-5">
-          <li class="mb-5"><RouterLink to="/">Button</RouterLink></li>
-          <li><RouterLink to="/card">Card</RouterLink></li>
-        </ul>
-      </div>
+      <ALayout title="Button Component"/>
     </div>
     <div class="m-5">
       <h2 class="text-2xl font-bold mb-4">Basic</h2>
