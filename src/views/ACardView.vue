@@ -1,39 +1,14 @@
 <script setup lang="ts">
-import { AButton } from '@Components';
 import ACard from '@/components/ACard.vue';
-import { ref } from 'vue';
+import ALayout from '@/components/ALayout.vue';
+import { AButton } from '@Components';
 
-const isSideBarOpen = ref(false);
-function toggleSideBar() {
-  isSideBarOpen.value = !isSideBarOpen.value;
-}
+
 </script>
 <template>
   <div class="h-full w-full bg-gray-100 p-10">
     <div>
-      <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold">Card Component</h1>
-        <i
-          @click="toggleSideBar"
-          class="pi pi-plus"
-        ></i>
-        <div
-          v-if="isSideBarOpen"
-          class="fixed top-0 right-0 h-full w-64 rounded-l-lg bg-gray-400 !p-4 p-2 text-white shadow-lg"
-        >
-          <div class="flex items-baseline justify-between">
-            <h2 class="mb-4 text-2xl font-bold">Components</h2>
-            <i
-              @click="toggleSideBar"
-              class="pi pi-times"
-            ></i>
-          </div>
-          <ul class="ms-5 mt-10">
-            <li class="mb-5"><RouterLink to="/">Button</RouterLink></li>
-            <li><RouterLink to="/card">Card</RouterLink></li>
-          </ul>
-        </div>
-      </div>
+      <ALayout title="Card Component"/>
     </div>
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Basic</h2>
