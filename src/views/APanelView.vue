@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import AButton from '@/components/AButton.vue';
+import { AButton } from '@Components';
 import ACard from '@/components/ACard.vue';
 import ALayout from '@/components/ALayout.vue';
 import APanel from '@/components/APanel.vue';

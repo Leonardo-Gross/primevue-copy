@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AButton from '@/components/AButton.vue';
+import { AButton } from '@Components';
 import ACard from '@/components/ACard.vue';
 import { ref } from 'vue';
 
