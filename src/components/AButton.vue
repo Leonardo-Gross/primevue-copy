@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, type PropType, inject, useSlots } from 'vue'
+import { ref, computed, type PropType, inject, useSlots } from 'vue';
 
 // --- Props ---
 const props = defineProps({
@@ -15,60 +15,64 @@ const props = defineProps({
   rounded: Boolean,
   variant: {
     type: String as PropType<'text' | 'outlined' | 'contained'>,
-    default: 'contained'
+    default: 'contained',
   },
   iconOnly: Boolean,
   badge: String,
   buttonSize: {
     type: String as PropType<'small' | 'normal' | 'large'>,
-    default: 'normal'
+    default: 'normal',
   },
   size: {
     type: String as PropType<'small' | 'normal' | 'large'>,
-    default: 'normal'
+    default: 'normal',
   },
   severity: {
     type: String,
-    default: 'primary'
+    default: 'primary',
   },
   autoLoading: {
     type: Boolean,
-    default: false
-  }
-})
+    default: false,
+  },
+});
 
 // --- Injeções & Slots ---
-const slots = useSlots()
-const inGroup = inject('inButtonGroup', false)
+const slots = useSlots();
+const inGroup = inject('inButtonGroup', false);
 
 // --- Model & Emits ---
-const modelLoading = defineModel<boolean>('loading')
-const emit = defineEmits(['click'])
+const modelLoading = defineModel<boolean>('loading');
+const emit = defineEmits(['click']);
 
 // --- Refs & Computeds ---
-const isLoadingInternally = ref(false)
+const isLoadingInternally = ref(false);
 
 const isLoading = computed(() => {
-  return props.autoLoading
-    ? isLoadingInternally.value
-    : modelLoading?.value ?? false
-})
+  return props.autoLoading ? isLoadingInternally.value : (modelLoading?.value ?? false);
+});
 
-const isVertical = computed(() => ['top', 'bottom'].includes(props.iconPos))
-const iconFirst = computed(() => props.iconPos === 'left' || props.iconPos === 'top')
+const isVertical = computed(() => ['top', 'bottom'].includes(props.iconPos));
+const iconFirst = computed(() => props.iconPos === 'left' || props.iconPos === 'top');
 
 const isIconOnly = computed(() => {
-  return !!props.icon && !props.label && !slots.default
-})
+  return !!props.icon && !props.label && !slots.default;
+});
 
-const hasDefaultSlot = computed(() => !!slots.default)
+const hasDefaultSlot = computed(() => !!slots.default);
 
 // --- Severidade / Variant ---
 type Severity =
-  | 'primary' | 'secondary' | 'success' | 'info'
-  | 'warn' | 'help' | 'danger' | 'contrast'
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'info'
+  | 'warn'
+  | 'help'
+  | 'danger'
+  | 'contrast';
 
-const severityKey = (props.severity?.toLowerCase() ?? 'primary') as Severity
+const severityKey = (props.severity?.toLowerCase() ?? 'primary') as Severity;
 
 const severityVariants = computed(() => {
   if (props.variant === 'text') {
@@ -80,8 +84,8 @@ const severityVariants = computed(() => {
       warn: 'text-orange-500 hover:bg-orange-50',
       help: 'text-purple-600 hover:bg-purple-50',
       danger: 'text-red-500 hover:bg-red-50',
-      contrast: 'text-gray-950 hover:bg-gray-100'
-    }[severityKey]
+      contrast: 'text-gray-950 hover:bg-gray-100',
+    }[severityKey];
   }
 
   if (props.variant === 'outlined') {
@@ -93,8 +97,8 @@ const severityVariants = computed(() => {
       warn: 'border border-orange-400 text-orange-600 hover:bg-orange-50',
       help: 'border border-purple-600 text-purple-700 hover:bg-purple-50',
       danger: 'border border-red-500 text-red-600 hover:bg-red-50',
-      contrast: 'border border-gray-950 text-gray-950 hover:bg-gray-100'
-    }[severityKey]
+      contrast: 'border border-gray-950 text-gray-950 hover:bg-gray-100',
+    }[severityKey];
   }
 
   return {
@@ -105,41 +109,48 @@ const severityVariants = computed(() => {
     warn: 'bg-orange-400 hover:bg-orange-500 text-white',
     help: 'bg-purple-600 hover:bg-purple-700 text-white',
     danger: 'bg-red-500 hover:bg-red-600 text-white',
-    contrast: 'bg-gray-950 hover:bg-gray-800 text-white'
-  }[severityKey]
-})
+    contrast: 'bg-gray-950 hover:bg-gray-800 text-white',
+  }[severityKey];
+});
 
 // --- Classes ---
 const sizeClass = computed(() => {
   switch (props.buttonSize) {
-    case 'small': return 'h-8 px-3 text-sm'
-    case 'large': return 'h-11 px-5 text-lg'
-    default: return 'min-h-10 px-4 text-base'
+    case 'small':
+      return 'h-8 px-3 text-sm';
+    case 'large':
+      return 'h-11 px-5 text-lg';
+    default:
+      return 'min-h-10 px-4 text-base';
   }
-})
+});
 
 const iconSizeClass = computed(() => {
-  const base = {
-    small: 'text-xs',
-    large: 'text-xl',
-    normal: 'text-base'
-  }[props.buttonSize] || 'text-base'
+  const base =
+    {
+      small: 'text-xs',
+      large: 'text-xl',
+      normal: 'text-base',
+    }[props.buttonSize] || 'text-base';
 
-  return `${base}`
-})
+  return `${base}`;
+});
 
 const iconOnlySizeClass = computed(() => {
-  if (!isIconOnly.value) return ''
+  if (!isIconOnly.value) return '';
   switch (props.buttonSize) {
-    case 'small': return 'w-8 h-8'
-    case 'large': return 'w-12 h-12'
-    default: return 'w-10 h-10'
+    case 'small':
+      return 'w-8 h-8';
+    case 'large':
+      return 'w-12 h-12';
+    default:
+      return 'w-10 h-10';
   }
-})
+});
 
 const layoutClass = computed(() => {
-  return isVertical.value ? 'flex-col' : 'flex-row'
-})
+  return isVertical.value ? 'flex-col' : 'flex-row';
+});
 
 const buttonClasses = computed(() => ({
   'inline-flex items-center justify-center transition-colors duration-200 cursor-pointer': true,
@@ -150,24 +161,24 @@ const buttonClasses = computed(() => ({
   '!shadow-md/30': props.raised,
   'rounded-full': props.rounded,
   'bg-transparent text-black font-medium hover:underline hover:bg-white': props.link,
-  'rounded': !props.rounded && !inGroup,
+  rounded: !props.rounded && !inGroup,
   'border border-l-0 first:border-l': inGroup && props.variant !== 'text',
   'first:rounded-l last:rounded-r rounded-none': inGroup,
-  '-ml-px first:ml-0': inGroup
-}))
+  '-ml-px first:ml-0': inGroup,
+}));
 
 // --- Handlers ---
 const handleClick = async (e: Event) => {
-  if (props.disabled || isLoading.value) return
+  if (props.disabled || isLoading.value) return;
 
-  emit('click', e)
+  emit('click', e);
 
   if (props.autoLoading && modelLoading) {
-    modelLoading.value = true
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    modelLoading.value = false
+    modelLoading.value = true;
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    modelLoading.value = false;
   }
-}
+};
 </script>
 
 <template>
@@ -181,8 +192,14 @@ const handleClick = async (e: Event) => {
   >
     <!-- 1. Ícone isolado -->
     <template v-if="isIconOnly">
-      <span class="flex items-center justify-center w-full h-full">
-        <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
+      <span class="flex h-full w-full items-center justify-center">
+        <i
+          :class="[
+            props.iconClass,
+            iconSizeClass,
+            isLoading ? 'pi pi-spinner animate-spin' : props.icon,
+          ]"
+        />
       </span>
     </template>
 
@@ -193,21 +210,37 @@ const handleClick = async (e: Event) => {
 
     <!-- 3. Layout padrão: ícone + label -->
     <template v-else>
-      <div :class="['flex items-center justify-center', layoutClass, isVertical ? 'gap-1' : 'gap-2']">
+      <div
+        :class="['flex items-center justify-center', layoutClass, isVertical ? 'gap-1' : 'gap-2']"
+      >
         <span v-if="(props.icon || isLoading) && iconFirst">
-          <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
+          <i
+            :class="[
+              props.iconClass,
+              iconSizeClass,
+              isLoading ? 'pi pi-spinner animate-spin' : props.icon,
+            ]"
+          />
         </span>
 
         <span v-if="props.label">{{ props.label }}</span>
 
         <span v-if="(props.icon || isLoading) && !iconFirst">
-          <i :class="[props.iconClass, iconSizeClass, isLoading ? 'pi pi-spinner animate-spin' : props.icon]" />
+          <i
+            :class="[
+              props.iconClass,
+              iconSizeClass,
+              isLoading ? 'pi pi-spinner animate-spin' : props.icon,
+            ]"
+          />
         </span>
 
-        <span v-if="props.badge" class="ml-2 bg-white text-black text-sm leading-none rounded-full px-2 py-0.5">
+        <span
+          v-if="props.badge"
+          class="ml-2 rounded-full bg-white px-2 py-0.5 text-sm leading-none text-black"
+        >
           {{ props.badge }}
         </span>
-
       </div>
     </template>
   </component>
