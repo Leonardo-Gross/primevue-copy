@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import AButtonView from '../views/AButtonView.vue';
 import ACardView from '../views/ACardView.vue';
 import APanelView from '../views/APanelView.vue';
-// import ADividerView from '../views/ADividerView.vue'
+ import ADividerView from '../views/ADividerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,11 +22,11 @@ const router = createRouter({
       name: 'panel',
       component: APanelView,
     },
-    // {
-    //   path: '/divider',
-    //   name: 'divider',
-    //   component: ADividerView,
-    // }
+     {
+       path: '/divider',
+       name: 'divider',
+       component: ADividerView,
+     }
   ],
 });
 

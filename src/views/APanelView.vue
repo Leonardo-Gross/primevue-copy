@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { AButton } from '@Components';
-import ACard from '@/components/ACard.vue';
-import ALayout from '@/components/ALayout.vue';
-import APanel from '@/components/APanel.vue';
+import ACard from '@/components/atoms/ACard/ACard.vue';
+import ALayout from '@/components/templates/ALayout/ALayout.vue';
+import APanel from '@/components/atoms/APanel/APanel.vue';
 
 const panels = reactive<Record<string, boolean>>({
   basic: true,

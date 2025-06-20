@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ACard from '@/components/ACard.vue';
-import ALayout from '@/components/ALayout.vue';
+import { ACard } from '@Components';
+import ALayout from '@/components/templates/ALayout/ALayout.vue';
 import { AButton } from '@Components';
 
 
