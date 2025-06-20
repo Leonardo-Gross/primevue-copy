@@ -9,9 +9,12 @@ const { header } = defineProps<{ header?: string; open: boolean }>();
       class="mb-2 flex items-center justify-between font-bold"
     >
       <span>{{ header }}</span>
+
       <slot name="header" />
+
       <slot name="icons" />
     </div>
+
     <Transition
       enter-active-class="transition-all duration-300 ease-in-out"
       enter-from-class="opacity-0 max-h-0"
@@ -25,6 +28,7 @@ const { header } = defineProps<{ header?: string; open: boolean }>();
         class="overflow-hidden"
       >
         <slot />
+
         <slot name="footer" />
       </div>
     </Transition>
