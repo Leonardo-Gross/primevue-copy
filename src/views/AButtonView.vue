@@ -2,8 +2,9 @@
 import { AButton } from '@Components';
 import { ref } from 'vue';
 
-import ButtonGroup from '../components/ButtonGroup.vue';
-import ALayout from '@/components/ALayout.vue';
+import ButtonGroup from '../components/molecules/MButtonGroup/MButtonGroup.vue';
+import ALayout from '@/components/templates/ALayout/ALayout.vue';
+import type { POSITION } from '@/components/atoms/AButton/types';
 
 const loading = ref(false);
 const currentSize = ref<'small' | 'normal' | 'large'>('normal');
@@ -21,6 +22,7 @@ const load = async () => {
     <div>
       <ALayout title="Button Component" />
     </div>
+
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Basic</h2>
       <div
@@ -38,12 +40,10 @@ const load = async () => {
           <AButton
             label="Profile"
             icon="pi pi-user"
-            iconPos="left"
           />
           <AButton
             label="Save"
             icon="pi pi-check"
-            iconPos="right"
           />
         </div>
         <div class="mt-4 flex justify-center gap-4">
