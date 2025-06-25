@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import ACard from '@/components/ACard.vue';
-import ALayout from '@/components/ALayout.vue';
-import { AButton } from '@Components';
+import { SEVERITY } from '@Enums';
+import { AButton, ACard } from '@Atoms';
+import { ALayout} from '@Templates';
 
 
 </script>
@@ -42,8 +42,7 @@ import { AButton } from '@Components';
           <template #footer>
             <div class="mt-4 flex justify-center gap-4">
               <AButton
-                class="w-full max-w-50"
-                severity="secondary"
+                :severity="SEVERITY.SECONDARY"
                 label="Cancel"
               />
               <AButton
