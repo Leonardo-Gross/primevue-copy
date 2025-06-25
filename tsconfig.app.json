@@ -13,6 +13,8 @@
       "@Molecules": ["./src/components/molecules"],
       "@Organisms": ["./src/components/organisms"],
       "@Templates": ["./src/components/templates"],
+      "@Types": ["./src/types"],
+      "@Enums": ["./src/enums"],
     }
   }
 }
