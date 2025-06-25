@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { AButton } from '@Components';
 import { ref } from 'vue';
+import { POSITION, SEVERITY, SIZE, VARIANT} from '@Enums';
+import { AButton } from '@Atoms';
+import { MButtonGroup } from '@Molecules';
+import { ALayout } from '@Templates';
 
-import ButtonGroup from '../components/molecules/MButtonGroup/MButtonGroup.vue';
-import ALayout from '@/components/templates/ALayout/ALayout.vue';
-import type { POSITION } from '@/components/atoms/AButton/types';
+defineExpose({ POSITION });
 
 const loading = ref(false);
-const currentSize = ref<'small' | 'normal' | 'large'>('normal');
-const sizeOptions = ['small', 'normal', 'large'] as const;
+const currentSize = ref<SIZE>(SIZE.NORMAL);
+const sizeOptions = [SIZE.SMALL, SIZE.NORMAL, SIZE.LARGE] as const;
 
 const load = async () => {
   loading.value = true;
@@ -22,7 +23,6 @@ const load = async () => {
     <div>
       <ALayout title="Button Component" />
     </div>
-
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Basic</h2>
       <div
@@ -44,18 +44,19 @@ const load = async () => {
           <AButton
             label="Save"
             icon="pi pi-check"
+            :iconPos="POSITION.RIGHT"
           />
         </div>
         <div class="mt-4 flex justify-center gap-4">
           <AButton
             label="Profile"
             icon="pi pi-search"
-            iconPos="top"
+            :iconPos="POSITION.TOP"
           />
           <AButton
             label="Profile"
             icon="pi pi-refresh"
-            iconPos="bottom"
+            :iconPos="POSITION.BOTTOM"
           />
         </div>
       </div>
@@ -69,7 +70,7 @@ const load = async () => {
         <AButton
           label="Search"
           icon="pi pi-check"
-          iconPos="right"
+          :iconPos="POSITION.RIGHT"
           :loading="loading"
           @click="load"
         />
@@ -102,35 +103,35 @@ const load = async () => {
       >
         <AButton
           label="Primary"
-          severity="primary"
+          :severity="SEVERITY.PRIMARY"
         />
         <AButton
           label="Secondary"
-          severity="secondary"
+          :severity="SEVERITY.SECONDARY"
         />
         <AButton
           label="Success"
-          severity="success"
+          :severity="SEVERITY.SUCESS"
         />
         <AButton
           label="Info"
-          severity="info"
+          :severity="SEVERITY.INFO"
         />
         <AButton
           label="Warn"
-          severity="warn"
+          :severity="SEVERITY.WARN"
         />
         <AButton
           label="Help"
-          severity="help"
+          :severity="SEVERITY.HELP"
         />
         <AButton
           label="Danger"
-          severity="danger"
+          :severity="SEVERITY.DANGER"
         />
         <AButton
           label="Contrast"
-          severity="contrast"
+          :severity="SEVERITY.CONTRAST"
         />
       </div>
     </div>
@@ -154,42 +155,42 @@ const load = async () => {
       >
         <AButton
           label="Primary"
-          severity="primary"
+          :severity="SEVERITY.PRIMARY"
           raised
         />
         <AButton
           label="Secondary"
-          severity="secondary"
+          :severity="SEVERITY.SECONDARY"
           raised
         />
         <AButton
           label="Success"
-          severity="success"
+          :severity="SEVERITY.SUCESS"
           raised
         />
         <AButton
           label="Info"
-          severity="info"
+          :severity="SEVERITY.INFO"
           raised
         />
         <AButton
           label="Warn"
-          severity="warn"
+          :severity="SEVERITY.WARN"
           raised
         />
         <AButton
           label="Help"
-          severity="help"
+          :severity="SEVERITY.HELP"
           raised
         />
         <AButton
           label="Danger"
-          severity="danger"
+          :severity="SEVERITY.DANGER"
           raised
         />
         <AButton
           label="Contrast"
-          severity="contrast"
+          :severity="SEVERITY.CONTRAST"
           raised
         />
       </div>
@@ -202,42 +203,42 @@ const load = async () => {
       >
         <AButton
           label="Primary"
-          severity="primary"
+          :severity="SEVERITY.PRIMARY"
           rounded
         />
         <AButton
           label="Secondary"
-          severity="secondary"
+          :severity="SEVERITY.SECONDARY"
           rounded
         />
         <AButton
           label="Success"
-          severity="success"
+          :severity="SEVERITY.SUCESS"
           rounded
         />
         <AButton
           label="Info"
-          severity="info"
+          :severity="SEVERITY.INFO"
           rounded
         />
         <AButton
           label="Warn"
-          severity="warn"
+          :severity="SEVERITY.WARN"
           rounded
         />
         <AButton
           label="Help"
-          severity="help"
+          :severity="SEVERITY.HELP"
           rounded
         />
         <AButton
           label="Danger"
-          severity="danger"
+          :severity="SEVERITY.DANGER"
           rounded
         />
         <AButton
           label="Contrast"
-          severity="contrast"
+          :severity="SEVERITY.CONTRAST"
           rounded
         />
       </div>
@@ -250,43 +251,43 @@ const load = async () => {
       >
         <AButton
           label="Primary"
-          severity="primary"
-          variant="text"
+          :severity="SEVERITY.PRIMARY"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Secondary"
-          severity="secondary"
-          variant="text"
+          :severity="SEVERITY.SECONDARY"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Success"
-          severity="success"
-          variant="text"
+          :severity="SEVERITY.SUCESS"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Info"
-          severity="info"
-          variant="text"
+          :severity="SEVERITY.INFO"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Warn"
-          severity="warn"
-          variant="text"
+          :severity="SEVERITY.WARN"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Help"
-          severity="help"
-          variant="text"
+          :severity="SEVERITY.HELP"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Danger"
-          severity="danger"
-          variant="text"
+          :severity="SEVERITY.DANGER"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Contrast"
-          severity="contrast"
-          variant="text"
+          :severity="SEVERITY.CONTRAST"
+          :variant="VARIANT.TEXT"
         />
       </div>
     </div>
@@ -298,51 +299,51 @@ const load = async () => {
       >
         <AButton
           label="Primary"
-          severity="primary"
+          :severity="SEVERITY.PRIMARY"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Secondary"
-          severity="secondary"
+          :severity="SEVERITY.SECONDARY"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Success"
-          severity="success"
+          :severity="SEVERITY.SUCESS"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Info"
-          severity="info"
+          :severity="SEVERITY.INFO"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Warn"
-          severity="warn"
+          :severity="SEVERITY.WARN"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Help"
-          severity="help"
+          :severity="SEVERITY.HELP"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Danger"
-          severity="danger"
+          :severity="SEVERITY.DANGER"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
         <AButton
           label="Contrast"
-          severity="contrast"
+          :severity="SEVERITY.CONTRAST"
           raised
-          variant="text"
+          :variant="VARIANT.TEXT"
         />
       </div>
     </div>
@@ -354,43 +355,43 @@ const load = async () => {
       >
         <AButton
           label="Primary"
-          severity="primary"
-          variant="outlined"
+          :severity="SEVERITY.PRIMARY"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Secondary"
-          severity="secondary"
-          variant="outlined"
+          :severity="SEVERITY.SECONDARY"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Success"
-          severity="success"
-          variant="outlined"
+          :severity="SEVERITY.SUCESS"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Info"
-          severity="info"
-          variant="outlined"
+          :severity="SEVERITY.INFO"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Warn"
-          severity="warn"
-          variant="outlined"
+          :severity="SEVERITY.WARN"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Help"
-          severity="help"
-          variant="outlined"
+          :severity="SEVERITY.HELP"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Danger"
-          severity="danger"
-          variant="outlined"
+          :severity="SEVERITY.DANGER"
+          :variant="VARIANT.OUTLINED"
         />
         <AButton
           label="Contrast"
-          severity="contrast"
-          variant="outlined"
+          :severity="SEVERITY.CONTRAST"
+          :variant="VARIANT.OUTLINED"
         />
       </div>
     </div>
@@ -418,91 +419,91 @@ const load = async () => {
           <AButton
             icon="pi pi-check"
             :buttonSize="currentSize"
-            severity="primary"
+            :severity="SEVERITY.PRIMARY"
           />
           <AButton
             icon="pi pi-bookmark"
             :buttonSize="currentSize"
-            severity="secondary"
+            :severity="SEVERITY.SECONDARY"
           />
           <AButton
             icon="pi pi-search"
             :buttonSize="currentSize"
-            severity="success"
+            :severity="SEVERITY.SUCESS"
           />
           <AButton
             icon="pi pi-user"
             :buttonSize="currentSize"
-            severity="info"
+            :severity="SEVERITY.INFO"
           />
           <AButton
             icon="pi pi-bell"
             :buttonSize="currentSize"
-            severity="warn"
+            :severity="SEVERITY.WARN"
           />
           <AButton
             icon="pi pi-heart"
             :buttonSize="currentSize"
-            severity="help"
+            :severity="SEVERITY.HELP"
           />
           <AButton
             icon="pi pi-times"
             :buttonSize="currentSize"
-            severity="danger"
+            :severity="SEVERITY.DANGER"
           />
           <AButton
             icon="pi pi-star"
             :buttonSize="currentSize"
-            severity="contrast"
+            :severity="SEVERITY.CONTRAST"
           />
         </div>
         <div class="mb-6 flex justify-center gap-4">
           <AButton
             icon="pi pi-check"
             :buttonSize="currentSize"
-            severity="primary"
+            :severity="SEVERITY.PRIMARY"
             rounded
           />
           <AButton
             icon="pi pi-bookmark"
             :buttonSize="currentSize"
-            severity="secondary"
+            :severity="SEVERITY.SECONDARY"
             rounded
           />
           <AButton
             icon="pi pi-search"
             :buttonSize="currentSize"
-            severity="success"
+            :severity="SEVERITY.SUCESS"
             rounded
           />
           <AButton
             icon="pi pi-user"
             :buttonSize="currentSize"
-            severity="info"
+            :severity="SEVERITY.INFO"
             rounded
           />
           <AButton
             icon="pi pi-bell"
             :buttonSize="currentSize"
-            severity="warn"
+            :severity="SEVERITY.WARN"
             rounded
           />
           <AButton
             icon="pi pi-heart"
             :buttonSize="currentSize"
-            severity="help"
+            :severity="SEVERITY.HELP"
             rounded
           />
           <AButton
             icon="pi pi-times"
             :buttonSize="currentSize"
-            severity="danger"
+            :severity="SEVERITY.DANGER"
             rounded
           />
           <AButton
             icon="pi pi-star"
             :buttonSize="currentSize"
-            severity="contrast"
+            :severity="SEVERITY.CONTRAST"
             rounded
           />
         </div>
@@ -510,182 +511,182 @@ const load = async () => {
           <AButton
             icon="pi pi-check"
             :buttonSize="currentSize"
-            severity="primary"
+            :severity="SEVERITY.PRIMARY"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-bookmark"
             :buttonSize="currentSize"
-            severity="secondary"
+            :severity="SEVERITY.SECONDARY"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-search"
             :buttonSize="currentSize"
-            severity="success"
+            :severity="SEVERITY.SUCESS"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-user"
             :buttonSize="currentSize"
-            severity="info"
+            :severity="SEVERITY.INFO"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-bell"
             :buttonSize="currentSize"
-            severity="warn"
+            :severity="SEVERITY.WARN"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-heart"
             :buttonSize="currentSize"
-            severity="help"
+            :severity="SEVERITY.HELP"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-times"
             :buttonSize="currentSize"
-            severity="danger"
+            :severity="SEVERITY.DANGER"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
           <AButton
             icon="pi pi-star"
             :buttonSize="currentSize"
-            severity="contrast"
+            :severity="SEVERITY.CONTRAST"
             rounded
-            variant="outlined"
+            :variant="VARIANT.OUTLINED"
           />
         </div>
         <div class="mb-6 flex justify-center gap-4">
           <AButton
             icon="pi pi-check"
             :buttonSize="currentSize"
-            severity="primary"
+            :severity="SEVERITY.PRIMARY"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-bookmark"
             :buttonSize="currentSize"
-            severity="secondary"
+            :severity="SEVERITY.SECONDARY"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-search"
             :buttonSize="currentSize"
-            severity="success"
+            :severity="SEVERITY.SUCESS"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-user"
             :buttonSize="currentSize"
-            severity="info"
+            :severity="SEVERITY.INFO"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-bell"
             :buttonSize="currentSize"
-            severity="warn"
+            :severity="SEVERITY.WARN"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-heart"
             :buttonSize="currentSize"
-            severity="help"
+            :severity="SEVERITY.HELP"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-times"
             :buttonSize="currentSize"
-            severity="danger"
+            :severity="SEVERITY.DANGER"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-star"
             :buttonSize="currentSize"
-            severity="contrast"
+            :severity="SEVERITY.CONTRAST"
             rounded
             raised
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
         </div>
         <div class="mb-6 flex justify-center gap-4">
           <AButton
             icon="pi pi-check"
             :buttonSize="currentSize"
-            severity="primary"
+            :severity="SEVERITY.PRIMARY"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-bookmark"
             :buttonSize="currentSize"
-            severity="secondary"
+            :severity="SEVERITY.SECONDARY"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-search"
             :buttonSize="currentSize"
-            severity="success"
+            :severity="SEVERITY.SUCESS"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-user"
             :buttonSize="currentSize"
-            severity="info"
+            :severity="SEVERITY.INFO"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-bell"
             :buttonSize="currentSize"
-            severity="warn"
+            :severity="SEVERITY.WARN"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-heart"
             :buttonSize="currentSize"
-            severity="help"
+            :severity="SEVERITY.HELP"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-times"
             :buttonSize="currentSize"
-            severity="danger"
+            :severity="SEVERITY.DANGER"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
           <AButton
             icon="pi pi-star"
             :buttonSize="currentSize"
-            severity="contrast"
+            :severity="SEVERITY.CONTRAST"
             rounded
-            variant="text"
+            :variant="VARIANT.TEXT"
           />
         </div>
       </div>
@@ -711,7 +712,7 @@ const load = async () => {
       <div
         class="card flex justify-center rounded-lg border border-solid border-gray-200 bg-gray-50 p-5"
       >
-        <ButtonGroup>
+        <MButtonGroup>
           <AButton
             label="Save"
             icon="pi pi-check"
@@ -724,7 +725,7 @@ const load = async () => {
             label="Cancel"
             icon="pi pi-times"
           />
-        </ButtonGroup>
+        </MButtonGroup>
       </div>
     </div>
     <div class="m-5">
@@ -735,7 +736,7 @@ const load = async () => {
         <AButton
           label="Small"
           icon="pi pi-check"
-          buttonSize="small"
+          :buttonSize="SIZE.SMALL"
         />
         <AButton
           label="Normal"
@@ -744,7 +745,8 @@ const load = async () => {
         <AButton
           label="Large"
           icon="pi pi-check"
-          buttonSize="large"
+          :buttonSize="SIZE.LARGE"
+
         />
       </div>
     </div>
