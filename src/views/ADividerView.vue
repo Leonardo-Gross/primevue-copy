@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ADivider } from '@/Components';
+import { ADivider } from '@Atoms';
 import { ALayout } from '@Templates'
 </script>
 <template>

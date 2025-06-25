@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
-import { AButton } from '@Components';
-import ACard from '@/components/atoms/ACard/ACard.vue';
-import ALayout from '@/components/templates/ALayout/ALayout.vue';
-import APanel from '@/components/atoms/APanel/APanel.vue';
+import { AButton, ACard, APanel } from '@Atoms';
+import { ALayout } from '@Templates';
+import { SEVERITY } from '@Enums';
 
 const panels = reactive<Record<string, boolean>>({
   basic: true,
@@ -99,7 +98,7 @@ function togglePanel(id: string) {
                   text
                   class="!bg-gray-50"
                   icon="pi pi-user"
-                  severity="secondary"
+                  :severity="SEVERITY.SECONDARY"
                 />
 
                 <AButton
@@ -107,7 +106,7 @@ function togglePanel(id: string) {
                   text
                   class="!bg-gray-50"
                   icon="pi pi-bookmark"
-                  severity="secondary"
+                  :severity="SEVERITY.SECONDARY"
                 />
               </div>
 
@@ -119,7 +118,7 @@ function togglePanel(id: string) {
             <div class="flex items-center gap-4">
               <AButton
                 icon="pi pi-cog"
-                severity="secondary"
+                :severity="SEVERITY.SECONDARY"
                 rounded
                 text
                 class="!bg-gray-50"
