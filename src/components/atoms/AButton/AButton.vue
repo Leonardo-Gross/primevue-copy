@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, inject, useSlots } from 'vue';
-import type { Position, Severity, Size, Variant } from './types';
-import { POSITION, SEVERITY, SIZE, VARIANT } from './types';
+import { computed, inject, ref, useSlots } from 'vue';
+import type { Position, Severity, Size, Variant } from '@Types';
+import { POSITION, SEVERITY, SIZE, VARIANT } from '@Enums';
 
 const props = withDefaults(
   defineProps<{
@@ -64,39 +64,39 @@ const severityKey = (props.severity?.toLowerCase() ?? 'primary') as Severity;
 const severityVariants = computed(() => {
   if (props.variant === VARIANT.TEXT) {
     return {
+      contrast: 'text-gray-950 hover:bg-gray-100',
+      danger: 'text-red-500 hover:bg-red-50',
+      help: 'text-purple-600 hover:bg-purple-50',
+      info: 'text-blue-500 hover:bg-blue-50',
       primary: 'text-gray-950 hover:bg-gray-100',
       secondary: 'text-gray-600 hover:bg-gray-100',
       success: 'text-green-500 hover:bg-green-50',
-      info: 'text-blue-500 hover:bg-blue-50',
       warn: 'text-orange-500 hover:bg-orange-50',
-      help: 'text-purple-600 hover:bg-purple-50',
-      danger: 'text-red-500 hover:bg-red-50',
-      contrast: 'text-gray-950 hover:bg-gray-100',
     }[severityKey];
   }
 
   if (props.variant === 'outlined') {
     return {
+      contrast: 'border border-gray-950 text-gray-950 hover:bg-gray-100',
+      danger: 'border border-red-500 text-red-600 hover:bg-red-50',
+      help: 'border border-purple-600 text-purple-700 hover:bg-purple-50',
+      info: 'border border-blue-400 text-blue-600 hover:bg-blue-50',
       primary: 'border border-gray-200 text-gray-950 hover:bg-gray-100',
       secondary: 'border border-gray-300 text-gray-600 hover:bg-gray-100',
       success: 'border border-green-500 text-green-600 hover:bg-green-50',
-      info: 'border border-blue-400 text-blue-600 hover:bg-blue-50',
       warn: 'border border-orange-400 text-orange-600 hover:bg-orange-50',
-      help: 'border border-purple-600 text-purple-700 hover:bg-purple-50',
-      danger: 'border border-red-500 text-red-600 hover:bg-red-50',
-      contrast: 'border border-gray-950 text-gray-950 hover:bg-gray-100',
     }[severityKey];
   }
 
   return {
+    contrast: 'bg-gray-950 hover:bg-gray-800 text-white',
+    danger: 'bg-red-500 hover:bg-red-600 text-white',
+    help: 'bg-purple-600 hover:bg-purple-700 text-white',
+    info: 'bg-blue-400 hover:bg-blue-500 text-white',
     primary: 'bg-gray-950 hover:bg-gray-800 text-white',
     secondary: 'bg-gray-300 hover:bg-gray-400 text-gray-600',
     success: 'bg-green-500 hover:bg-green-600 text-white',
-    info: 'bg-blue-400 hover:bg-blue-500 text-white',
     warn: 'bg-orange-400 hover:bg-orange-500 text-white',
-    help: 'bg-purple-600 hover:bg-purple-700 text-white',
-    danger: 'bg-red-500 hover:bg-red-600 text-white',
-    contrast: 'bg-gray-950 hover:bg-gray-800 text-white',
   }[severityKey];
 });
 
