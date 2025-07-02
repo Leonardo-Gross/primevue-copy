@@ -1,4 +1,4 @@
-import { POSITION, SEVERITY, SIZE, VARIANT } from "@Enums";
+import { POSITION, SEVERITY, SIZE, VARIANT, ORIENTATION, STYLETYPE, ALIGN } from "@Enums";
 
 type Position = POSITION.BOTTOM | POSITION.LEFT | POSITION.RIGHT | POSITION.TOP;
 
@@ -16,5 +16,11 @@ type Size = SIZE.LARGE | SIZE.NORMAL | SIZE.SMALL;
 
 type Variant = VARIANT.CONTAINED | VARIANT.OUTLINED | VARIANT.TEXT;
 
-export type { Position, Severity, Size, Variant };
-export { POSITION, SEVERITY, SIZE, VARIANT };
+type Orientation = ORIENTATION.HORIZONTAL | ORIENTATION.VERTICAL;
+
+type StyleType = STYLETYPE.DASHED | STYLETYPE.DOTTED | STYLETYPE.SOLID
+
+type Align = ALIGN.LEFT | ALIGN.CENTER | ALIGN.RIGHT;
+
+export type { Position, Severity, Size, Variant, Orientation, StyleType, Align };
+export { POSITION, SEVERITY, SIZE, VARIANT, ORIENTATION, STYLETYPE, ALIGN };

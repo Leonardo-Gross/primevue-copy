@@ -1,3 +1,4 @@
+// AButtom Enums
 export enum POSITION {
   BOTTOM = 'bottom',
   LEFT = 'left',
@@ -28,5 +29,20 @@ export enum VARIANT {
   TEXT = 'text',
 }
 
+// ADivider Enums
+export enum ORIENTATION {
+  HORIZONTAL = 'horizotal',
+  VERTICAL = 'vertical'
+}
 
+export enum STYLETYPE {
+  SOLID = 'solid',
+  DOTTED = 'dotted',
+  DASHED = 'dashed'
+}
 
+export enum ALIGN {
+  LEFT = 'left',
+  CENTER = 'center',
+  RIGHT = 'right'
+}
