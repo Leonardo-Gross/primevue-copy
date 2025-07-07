@@ -20,7 +20,7 @@ export default defineConfig({
       '@Atoms': fileURLToPath(new URL('./src/components/atoms', import.meta.url)),
       '@Molecules': fileURLToPath(new URL('./src/components/molecules', import.meta.url)),
       '@Organisms': fileURLToPath(new URL('./src/components/organisms', import.meta.url)),
-      '@Templates': fileURLToPath(new URL('./src/components/templates', import.meta.url)),
+      '@Templates': fileURLToPath(new URL('./src/components/layout', import.meta.url)),
       '@Enums': fileURLToPath(new URL('./src/enums', import.meta.url)),
       '@Types': fileURLToPath(new URL('./src/types', import.meta.url)),
     },
