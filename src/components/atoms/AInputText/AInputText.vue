@@ -37,7 +37,7 @@ function onInput(event: Event) {
 }
 
 const disabledClass = computed(() =>
-  props.disabled ? ['bg-gray-200', 'cursor-not-allowed'] : ''
+  props.disabled ? ['bg-gray-200'] : ''
 )
 
 const filledClass = computed(() => [props.filled && 'bg-gray-100'])
@@ -67,8 +67,8 @@ const inputClass = computed(() => [
 ].filter(Boolean))
 </script>
 
-<template>
-  <input
+<template >
+  <input v-if="!props.disabled"
     :type="type"
     :name="name"
     :value="modelValue"
@@ -76,4 +76,16 @@ const inputClass = computed(() => [
     class="border p-1 rounded-md focus:outline-1 focus:border-none"
     :class="inputClass"
   />
+
+  <template v-else>
+    <input
+      :type="type"
+      :name="name"
+      :value="modelValue"
+      class="bg-gray-100 border p-1 rounded-md focus:outline-1 focus:border-none"
+      disabled
+    />
+  </template>
 </template>
+
+

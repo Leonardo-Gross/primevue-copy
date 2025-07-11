@@ -22,7 +22,7 @@ function isInvalid(name: string): boolean {
 <template>
   <div class="h-full w-full bg-gray-100 p-10">
     <div>
-      <ALayout title="Button Component" />
+      <ALayout title="Input Text Component" />
     </div>
 
     <div class="m-5">
