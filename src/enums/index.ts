@@ -29,6 +29,16 @@ export enum INPUTTYPE {
   WEEK = 'week',
 }
 
+export enum INPUTMASKPATTERN {
+  CELLPHONE = '(99) 99999-9999',
+  CEP = '99999-999',
+  CNPJ = '99.999.999/9999-99',
+  CPF = '999.999.999-99',
+  CREDIT_CARD = '9999 9999 9999 9999',
+  DATE = '99/99/9999',
+  PHONE = '(99) 9999-9999',
+}
+
 export enum ORIENTATION {
   HORIZONTAL = 'horizotal',
   VERTICAL = 'vertical',
