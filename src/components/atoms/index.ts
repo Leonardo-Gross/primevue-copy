@@ -3,3 +3,5 @@ export * from './ACard'
 export * from './ADivider'
 export * from './APanel'
 export * from './AInputText'
+export * from './AInputMask'
+
