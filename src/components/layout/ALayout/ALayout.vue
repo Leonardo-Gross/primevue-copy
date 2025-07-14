@@ -13,7 +13,7 @@ const toggleSideBar = () => {
     <div class="flex items-center justify-between">
 
       <h1 class="text-3xl font-bold">{{ props.title }}</h1>
-      
+
       <i
         @click="toggleSideBar"
         class="pi pi-plus cursor-pointer"
