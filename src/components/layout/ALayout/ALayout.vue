@@ -34,6 +34,8 @@ const toggleSideBar = () => {
         <li class="mb-5"><RouterLink to="/panel">Panel</RouterLink></li>
         <li class="mb-5"><RouterLink to="/divider">Divider</RouterLink></li>
         <li class="mb-5"><RouterLink to="/inputtext">Input Text</RouterLink></li>
+        <li class="mb-5"><RouterLink to="/inputmask">Input Mask</RouterLink></li>
+
       </ul>
     </div>
 
