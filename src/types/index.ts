@@ -1,4 +1,5 @@
-import { POSITION, SEVERITY, SIZE, VARIANT, ORIENTATION, STYLETYPE, ALIGN } from "@Enums";
+import { POSITION, SEVERITY, SIZE, VARIANT, STYLETYPE, ALIGN } from "@Enums";
+import { ORIENTATION } from "@/components/atoms/ADivider/enums";
 
 type Position = POSITION.BOTTOM | POSITION.LEFT | POSITION.RIGHT | POSITION.TOP;
 
