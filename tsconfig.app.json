@@ -12,7 +12,7 @@
       "@Atoms": ["./src/components/atoms"],
       "@Molecules": ["./src/components/molecules"],
       "@Organisms": ["./src/components/organisms"],
-      "@Templates": ["./src/components/layout"],
+      "@Layouts": ["./src/components/layout"],
       "@Types": ["./src/types"],
       "@Enums": ["./src/enums"],
     }

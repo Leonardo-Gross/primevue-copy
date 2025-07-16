@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ALIGN, SEVERITY, STYLETYPE } from '@Enums'
 import { AButton, ACard, ADivider } from '@Atoms';
-import { ALayout } from '@Templates';
+import { ALayout } from '@Layouts';
 import { ORIENTATION } from '../components/atoms/ADivider/enums';
 
 </script>

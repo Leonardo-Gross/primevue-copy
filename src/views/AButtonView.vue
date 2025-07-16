@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { POSITION, SEVERITY, SIZE, VARIANT} from '@Enums';
 import { AButton } from '@Atoms';
 import { MButtonGroup } from '@Molecules';
-import { ALayout } from '@Templates';
+import { ALayout } from '@Layouts';
 
 defineExpose({ POSITION });
 

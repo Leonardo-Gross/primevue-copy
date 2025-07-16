@@ -2,7 +2,7 @@
 import { reactive } from 'vue'
 import { INPUTTYPE, SEVERITY, SIZE } from '@Enums'
 import { AButton, AInputText } from '@Atoms'
-import { ALayout } from '@Components'
+import { ALayout } from '@Layouts'
 
 // Armazena os valores dos inputs
 const form = reactive<Record<string, string>>({})

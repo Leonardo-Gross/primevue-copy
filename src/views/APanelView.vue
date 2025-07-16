@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue';
 import { AButton, ACard, APanel } from '@Atoms';
-import { ALayout } from '@Templates';
+import { ALayout } from '@Layouts';
 import { SEVERITY } from '@Enums';
 
 const panels = reactive<Record<string, boolean>>({

@@ -21,7 +21,7 @@ export default defineConfig({
       '@Interfaces': fileURLToPath(new URL('./src/interfaces', import.meta.url)),
       '@Molecules': fileURLToPath(new URL('./src/components/molecules', import.meta.url)),
       '@Organisms': fileURLToPath(new URL('./src/components/organisms', import.meta.url)),
-      '@Templates': fileURLToPath(new URL('./src/components/layout', import.meta.url)),
+      '@Layouts': fileURLToPath(new URL('./src/components/layout', import.meta.url)),
       '@Types': fileURLToPath(new URL('./src/types', import.meta.url)),
     },
   },
