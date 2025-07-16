@@ -11,7 +11,9 @@ const toggleSideBar = () => {
 <template>
   <div>
     <div class="flex items-center justify-between">
+
       <h1 class="text-3xl font-bold">{{ props.title }}</h1>
+      
       <i
         @click="toggleSideBar"
         class="pi pi-plus cursor-pointer"
@@ -28,14 +30,19 @@ const toggleSideBar = () => {
           class="pi pi-times cursor-pointer"
         ></i>
       </div>
+
       <ul class="ms-5 mt-10">
         <li class="mb-5"><RouterLink to="/">Button</RouterLink></li>
-        <li class="mb-5"><RouterLink to="/card">Card</RouterLink></li>
-        <li class="mb-5"><RouterLink to="/panel">Panel</RouterLink></li>
-        <li class="mb-5"><RouterLink to="/divider">Divider</RouterLink></li>
-        <li class="mb-5"><RouterLink to="/inputtext">Input Text</RouterLink></li>
-        <li class="mb-5"><RouterLink to="/inputmask">Input Mask</RouterLink></li>
 
+        <li class="mb-5"><RouterLink to="/card">Card</RouterLink></li>
+
+        <li class="mb-5"><RouterLink to="/panel">Panel</RouterLink></li>
+
+        <li class="mb-5"><RouterLink to="/divider">Divider</RouterLink></li>
+
+        <li class="mb-5"><RouterLink to="/inputtext">Input Text</RouterLink></li>
+
+        <li class="mb-5"><RouterLink to="/inputmask">Input Mask</RouterLink></li>
       </ul>
     </div>
 

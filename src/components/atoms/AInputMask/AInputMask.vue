@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch, computed, onMounted } from 'vue';
-import { INPUTMASKPATTERN, SIZE } from '@Enums';
 import type { Size } from '@Types';
+import { INPUT_MASK_PATTERN, SIZE } from '@Enums';
 
 const props = withDefaults(
   defineProps<{
@@ -9,7 +9,7 @@ const props = withDefaults(
     disabled?: boolean
     filled?: boolean
     invalid?: boolean
-    mask: INPUTMASKPATTERN
+    mask: INPUT_MASK_PATTERN
     modelValue?: string
     name?: string
     placeholder?: string
@@ -31,83 +31,113 @@ const emit = defineEmits<{
   (e: 'register', name: string): void
 }>()
 
+let internalUpdate = false;
+
+const inner = ref(props.modelValue);
+
+const filledClass = computed(() => [props.filled && 'bg-gray-100'])
+
+const isInvalid = computed(() => !!props.invalid)
+
+const invalidClass = computed(() =>
+  isInvalid.value
+    ? ['border-red-600', 'text-red-600', 'hover:border-black']
+    : ['border-gray-300', 'text-gray-900']
+)
+
+const inputClasses = computed(() => {
+  const base = ['border', 'p-1', 'rounded-md', 'outline-none', 'transition-colors'];
+  const state = props.disabled ? ['bg-gray-200', 'cursor-not-allowed'] : ['focus:ring-2', 'focus:ring-blue-500'];
+  return [...base,
+          ...state,
+          ...[sizeClass.value],
+          filledClass.value,
+          ...invalidClass.value
+         ].flat().join(' ');
+});
+
+const sizeClass = computed(() =>
+  props.size === 'small'
+    ? 'h-7 w-55 px-3 text-sm'
+    : props.size === 'large'
+    ? 'h-11 w-75 px-5 text-lg'
+    : 'min-h-9 min-w-65 px-4 text-base'
+)
+
 onMounted(() => {
   if (props.name) emit('register', props.name)
 })
 
-const inner = ref(props.modelValue);
-let internalUpdate = false;
-
-watch(
-  () => props.modelValue,
-  (val) => {
-    internalUpdate = true;
-
-    const rawDigits = (val ?? '').replace(/\D/g, '');
-    const masked = applyMask(rawDigits, props.mask);
-    const isComplete = rawDigits.length >= maxDigitsByMask(props.mask);
-
-    inner.value = props.autoClear && !isComplete ? '' : masked;
-
-    internalUpdate = false;
-  }
-);
+watch(() => props.modelValue, () => {
+  onUpdateModelValue();
+});
 
 watch(inner, (val) => {
+  onInnerValueChange(val)
+});
+
+function onUpdateModelValue() {
+  internalUpdate = true;
+
+  const rawDigits = (props.modelValue ?? '').replace(/\D/g, '');
+  const masked = applyMask(rawDigits, props.mask);
+  const isComplete = rawDigits.length >= maxDigitsByMask(props.mask);
+
+  inner.value = props.autoClear && !isComplete ? '' : masked;
+
+  internalUpdate = false;
+}
+
+function onInnerValueChange(val: string) {
   if (!internalUpdate) {
     emit('update:modelValue', val);
   }
-});
-
-function maxDigitsByMask(mask: INPUTMASKPATTERN) {
-  switch (mask) {
-    case INPUTMASKPATTERN.CELLPHONE: return 11;
-    case INPUTMASKPATTERN.CPF: return 11;
-    case INPUTMASKPATTERN.DATE: return 8;
-    case INPUTMASKPATTERN.PHONE: return 10;
-    default: return 100;
-  }
 }
 
-function maxLengthByMask(mask: INPUTMASKPATTERN) {
-  switch (mask) {
-    case INPUTMASKPATTERN.CELLPHONE: return 15; // "(99) 99999-9999"
-    case INPUTMASKPATTERN.CPF: return 14;       // "999.999.999-99"
-    case INPUTMASKPATTERN.DATE: return 10;      // "99/99/9999"
-    case INPUTMASKPATTERN.PHONE: return 14;     // "(99) 9999-9999"
-    default: return 100;
-  }
+
+function maxDigitsByMask(mask: INPUT_MASK_PATTERN) {
+  return mask === INPUT_MASK_PATTERN.CELLPHONE ? 11
+    : mask === INPUT_MASK_PATTERN.CPF ? 11
+    : mask === INPUT_MASK_PATTERN.DATE ? 8
+    : mask === INPUT_MASK_PATTERN.PHONE ? 10
+    : 100;
 }
 
-function applyMask(value: string, pattern: INPUTMASKPATTERN): string {
+function maxLengthByMask(mask: INPUT_MASK_PATTERN) {
+  return mask === INPUT_MASK_PATTERN.CELLPHONE ? 15   // "(99) 99999-9999"
+    : mask === INPUT_MASK_PATTERN.CPF ? 14            // "999.999.999-99"
+    : mask === INPUT_MASK_PATTERN.DATE ? 10           // "99/99/9999"
+    : mask === INPUT_MASK_PATTERN.PHONE ? 14          // "(99) 9999-9999"
+    : 100;
+}
+
+function applyMask(value: string, pattern: INPUT_MASK_PATTERN): string {
   const digits = value.replace(/\D/g, '').slice(0, maxDigitsByMask(pattern));
 
-  switch (pattern) {
-    case INPUTMASKPATTERN.CELLPHONE:
-      return digits
+  return pattern === INPUT_MASK_PATTERN.CELLPHONE
+    ? digits
         .replace(/^(\d{2})(\d)/, '($1) $2')
         .replace(/(\d{5})(\d)/, '$1-$2')
-        .slice(0, maxLengthByMask(pattern));
-    case INPUTMASKPATTERN.CPF:
-      return digits
+        .slice(0, maxLengthByMask(pattern))
+    : pattern === INPUT_MASK_PATTERN.CPF
+    ? digits
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1.$2')
         .replace(/(\d{3})(\d)/, '$1-$2')
-        .slice(0, maxLengthByMask(pattern));
-    case INPUTMASKPATTERN.DATE:
-      return digits
+        .slice(0, maxLengthByMask(pattern))
+    : pattern === INPUT_MASK_PATTERN.DATE
+    ? digits
         .replace(/(\d{2})(\d)/, '$1/$2')
         .replace(/(\d{2})(\d)/, '$1/$2')
-        .slice(0, maxLengthByMask(pattern));
-    case INPUTMASKPATTERN.PHONE:
-      return digits
+        .slice(0, maxLengthByMask(pattern))
+    : pattern === INPUT_MASK_PATTERN.PHONE
+    ? digits
         .replace(/^(\d{2})(\d)/, '($1) $2')
         .replace(/(\d{4})(\d)/, '$1-$2')
-        .slice(0, maxLengthByMask(pattern));
-    default:
-      return value;
-  }
+        .slice(0, maxLengthByMask(pattern))
+    : value;
 }
+
 
 // Bloqueia caracteres que não sejam números e teclas funcionais no keydown
 function onKeyDown(event: KeyboardEvent) {
@@ -135,25 +165,6 @@ function onKeyDown(event: KeyboardEvent) {
   }
 }
 
-const sizeClass = computed(() =>
-  props.size === 'small'
-    ? 'h-7 w-55 px-3 text-sm'
-    : props.size === 'large'
-    ? 'h-11 w-75 px-5 text-lg'
-    : 'min-h-9 min-w-65 px-4 text-base'
-)
-
-const filledClass = computed(() => [props.filled && 'bg-gray-100'])
-
-const isInvalid = computed(() => !!props.invalid)
-
-const invalidClass = computed(() =>
-  isInvalid.value
-    ? ['border-red-600', 'text-red-600', 'hover:border-black']
-    : ['border-gray-300', 'text-gray-900']
-)
-
-
 function onInput(event: Event) {
   const input = event.target as HTMLInputElement;
   const raw = input.value.replace(/\D/g, '');
@@ -168,18 +179,6 @@ function onInput(event: Event) {
     emit('update:modelValue', masked);
   }
 }
-
-
-const inputClasses = computed(() => {
-  const base = ['border', 'p-1', 'rounded-md', 'outline-none', 'transition-colors'];
-  const state = props.disabled ? ['bg-gray-200', 'cursor-not-allowed'] : ['focus:ring-2', 'focus:ring-blue-500'];
-  return [...base,
-          ...state,
-          ...[sizeClass.value],
-          filledClass.value,
-          ...invalidClass.value
-         ].flat().join(' ');
-});
 
 </script>
 
