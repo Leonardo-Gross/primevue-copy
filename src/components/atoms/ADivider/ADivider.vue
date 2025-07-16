@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, useSlots } from 'vue';
 import type { Align, Orientation, StyleType } from '@Types';
-import { ALIGN, ORIENTATION, STYLETYPE } from '@Enums';
-
+import { ALIGN, STYLETYPE } from '@Enums';
+import { ORIENTATION } from './enums';
 const props = withDefaults(
   defineProps<{
     orientation?: Orientation;
@@ -21,35 +21,35 @@ const isVertical = computed(() => props.orientation === ORIENTATION.VERTICAL);
 const hasSlot = computed(() => !!slots.default);
 
 
-// Estilo das linhas 
+// Estilo das linhas
 const lineStyleClass = computed(() => {
   const base = 'border-gray-300 bg-transparent';
-  if (props.type === STYLETYPE.DASHED) return `border-b border-dashed ${base}`;
-  if (props.type === STYLETYPE.DOTTED) return `border-b border-dotted ${base}`;
-  return `border-b ${base}`;
+  return (props.type === STYLETYPE.DASHED) ?`border-b border-dashed ${base}`
+  : (props.type === STYLETYPE.DOTTED)?`border-b border-dotted ${base}`
+  : `border-b ${base}`;
 });
 
 
 const verticalLineClass = computed(() => {
   const base = 'border-gray-300 bg-transparent';
-  if (props.type === STYLETYPE.DASHED) return `border-l border-dashed ${base}`;
-  if (props.type === STYLETYPE.DOTTED) return `border-l border-dotted ${base}`;
-  return `border-l ${base}`;
+  return (props.type === STYLETYPE.DASHED) ? `border-l border-dashed ${base}`
+  : (props.type === STYLETYPE.DOTTED) ? `border-l border-dotted ${base}`
+  : `border-l ${base}`;
 });
 
 // Tamanhos condicionais
 const leftLineStyle = computed(() => {
-  if (!hasSlot.value) return { flex: 1 };
-  if (props.align === ALIGN.LEFT) return { width: '5%' };
-  if (props.align === ALIGN.RIGHT) return { flex: 1 };
-  return { flex: 1 };
+  return (!hasSlot.value) ? { flex: 1 }
+  : (props.align === ALIGN.LEFT) ? { width: '5%' }
+  : (props.align === ALIGN.RIGHT) ? { flex: 1 }
+  : { flex: 1 }
 });
 
 const rightLineStyle = computed(() => {
-  if (!hasSlot.value) return { flex: 1 };
-  if (props.align === ALIGN.LEFT) return { flex: 1 };
-  if (props.align === ALIGN.RIGHT) return { width: '5%' };
-  return { flex: 1 };
+  return (!hasSlot.value) ? { flex: 1 }
+  : (props.align === ALIGN.LEFT) ? { flex: 1 }
+  : (props.align === ALIGN.RIGHT) ? { width: '5%' }
+  : { flex: 1 };
 });
 
 
@@ -67,7 +67,7 @@ const rightLineStyle = computed(() => {
 
   <!-- Conteúdo central (ex: OR) -->
   <div
-    v-if="hasSlot"
+    v-if="$slots.default"
     class="mx-2 text-gray-700 text-sm font-semibold whitespace-nowrap"
   >
     <slot />
@@ -81,7 +81,7 @@ const rightLineStyle = computed(() => {
 </div>
 
   <template v-else>
-    <div v-if="hasSlot" class="flex flex-col items-center justify-center mx-2 min-h-[15rem]">
+    <div v-if="$slots.default" class="flex flex-col items-center justify-center mx-2 min-h-[15rem]">
       <div class="w-px grow" :class="verticalLineClass" />
 
       <div class="text-gray-700 text-sm font-semibold whitespace-nowrap my-2">
