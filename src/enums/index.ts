@@ -28,5 +28,14 @@ export enum VARIANT {
   TEXT = 'text',
 }
 
+export enum STYLETYPE {
+  SOLID = 'solid',
+  DOTTED = 'dotted',
+  DASHED = 'dashed'
+}
 
-
+export enum ALIGN {
+  LEFT = 'left',
+  CENTER = 'center',
+  RIGHT = 'right'
+}
