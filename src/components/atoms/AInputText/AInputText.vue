@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted } from 'vue'
 import type { InputType, Size } from '@Types'
-import { INPUTTYPE, SIZE } from '@Enums'
+import { INPUT_TYPE, SIZE } from '@Enums'
 
 const props = withDefaults(
   defineProps<{
@@ -19,7 +19,7 @@ const props = withDefaults(
     filled: false,
     invalid: false,
     size: SIZE.NORMAL,
-    type: INPUTTYPE.TEXT,
+    type: INPUT_TYPE.TEXT,
   }
 )
 

@@ -23,9 +23,10 @@ const load = async () => {
     <div>
       <ALayout title="Button Component" />
     </div>
-    
+
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Basic</h2>
+
       <div
         class="card flex flex-wrap justify-center gap-4 rounded-lg border border-solid border-gray-200 bg-gray-50 p-5"
       >
@@ -35,25 +36,30 @@ const load = async () => {
 
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Icons</h2>
+
       <div class="card rounded-lg border border-solid border-gray-200 bg-gray-50 p-5">
         <div class="flex justify-center gap-4">
           <AButton icon="pi pi-home" />
+
           <AButton
             label="Profile"
             icon="pi pi-user"
           />
+
           <AButton
             label="Save"
             icon="pi pi-check"
             :iconPos="POSITION.RIGHT"
           />
         </div>
+
         <div class="mt-4 flex justify-center gap-4">
           <AButton
             label="Profile"
             icon="pi pi-search"
             :iconPos="POSITION.TOP"
           />
+
           <AButton
             label="Profile"
             icon="pi pi-refresh"
@@ -65,6 +71,7 @@ const load = async () => {
 
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Loading</h2>
+
       <div
         class="card flex justify-center rounded-lg border border-solid border-gray-200 bg-gray-50 p-5"
       >
@@ -80,6 +87,7 @@ const load = async () => {
 
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Link</h2>
+
       <div
         class="card flex justify-center gap-4 rounded-lg border border-solid border-gray-200 bg-gray-50 p-5"
       >
@@ -87,6 +95,7 @@ const load = async () => {
           label="Link"
           link
         />
+
         <AButton
           as="a"
           label="External"
@@ -99,6 +108,7 @@ const load = async () => {
 
     <div class="m-5">
       <h2 class="mb-4 text-2xl font-bold">Severity</h2>
+
       <div
         class="card flex flex-wrap justify-center gap-4 rounded-lg border border-solid border-gray-200 bg-gray-50 p-5"
       >
@@ -106,30 +116,37 @@ const load = async () => {
           label="Primary"
           :severity="SEVERITY.PRIMARY"
         />
+
         <AButton
           label="Secondary"
           :severity="SEVERITY.SECONDARY"
         />
+
         <AButton
           label="Success"
           :severity="SEVERITY.SUCESS"
         />
+
         <AButton
           label="Info"
           :severity="SEVERITY.INFO"
         />
+
         <AButton
           label="Warn"
           :severity="SEVERITY.WARN"
         />
+
         <AButton
           label="Help"
           :severity="SEVERITY.HELP"
         />
+
         <AButton
           label="Danger"
           :severity="SEVERITY.DANGER"
         />
+
         <AButton
           label="Contrast"
           :severity="SEVERITY.CONTRAST"

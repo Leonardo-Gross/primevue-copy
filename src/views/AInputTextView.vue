@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import { INPUTTYPE, SEVERITY, SIZE } from '@Enums'
+import { INPUT_TYPE, SEVERITY, SIZE } from '@Enums'
 import { AButton, AInputText } from '@Atoms'
 import { ALayout } from '@Layouts'
 
@@ -30,7 +30,7 @@ function isInvalid(name: string): boolean {
       <div class="card flex flex-wrap justify-center gap-4 rounded-lg border border-solid border-gray-200 bg-gray-50 p-5">
         <AInputText
           name="basic"
-          :type="INPUTTYPE.TEXT"
+          :type="INPUT_TYPE.TEXT"
           v-model="form.basic"
           @register="registerField"
         />
@@ -43,14 +43,14 @@ function isInvalid(name: string): boolean {
         <div class="flex flex-col gap-4">
           <AInputText
             name="username"
-            :type="INPUTTYPE.TEXT"
+            :type="INPUT_TYPE.TEXT"
             placeholder="Username"
             v-model="form.username"
             @register="registerField"
           />
           <AInputText
             name="email"
-            :type="INPUTTYPE.TEXT"
+            :type="INPUT_TYPE.TEXT"
             placeholder="Email"
             v-model="form.email"
             @register="registerField"
@@ -65,7 +65,7 @@ function isInvalid(name: string): boolean {
       <div class="card flex flex-wrap justify-center gap-4 rounded-lg border border-solid border-gray-200 bg-gray-50 p-5">
         <AInputText
           name="filled"
-          :type="INPUTTYPE.TEXT"
+          :type="INPUT_TYPE.TEXT"
           :filled="true"
           v-model="form.filled"
           @register="registerField"
@@ -79,21 +79,21 @@ function isInvalid(name: string): boolean {
         <div class="card flex gap-3">
           <AInputText
             name="floatOver"
-            :type="INPUTTYPE.TEXT"
+            :type="INPUT_TYPE.TEXT"
             placeholder="Over Label"
             v-model="form.floatOver"
             @register="registerField"
           />
           <AInputText
             name="floatIn"
-            :type="INPUTTYPE.TEXT"
+            :type="INPUT_TYPE.TEXT"
             placeholder="In Label"
             v-model="form.floatIn"
             @register="registerField"
           />
           <AInputText
             name="floatOn"
-            :type="INPUTTYPE.TEXT"
+            :type="INPUT_TYPE.TEXT"
             placeholder="On Label"
             v-model="form.floatOn"
             @register="registerField"

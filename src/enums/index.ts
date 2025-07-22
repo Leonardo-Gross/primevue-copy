@@ -4,7 +4,7 @@ export enum ALIGN {
   RIGHT = 'right'
 }
 
-export enum INPUTTYPE {
+export enum INPUT_TYPE {
   BUTTON = 'button',
   CHECKBOX = 'checkbox',
   COLOR = 'color',
