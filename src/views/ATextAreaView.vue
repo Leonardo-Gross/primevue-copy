@@ -2,7 +2,7 @@
 import { reactive } from 'vue';
 import { SEVERITY, SIZE } from '@Enums';
 import { AButton, ATextArea } from '@Atoms';
-import { ALayout } from '@Templates';
+import { ALayout } from '@Layouts';
 
 // Armazena os valores
 const form = reactive<Record<string, string>>({})
