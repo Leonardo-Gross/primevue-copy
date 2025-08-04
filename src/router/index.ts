@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import AButtonView from '../views/AButtonView.vue';
 import ACardView from '../views/ACardView.vue';
+import ADividerView from '../views/ADividerView.vue'
+import AInputMaskView from '../views/AInputMaskView.vue';
+import AInputTextView from '../views/AInputTextView.vue';
 import APanelView from '../views/APanelView.vue';
+import ATextAreaView from '../views/ATextAreaView.vue';
  import ADividerView from '../views/ADividerView.vue'
 import AInputText from '../views/AInputTextView.vue';
 import AInputMask from '../views/AInputMaskView.vue';
@@ -32,11 +36,18 @@ const router = createRouter({
     {
       path: '/inputtext',
       name: 'inputtext',
+      component: AInputTextView,
       component: AInputText,
     },
     {
       path: '/inputmask',
       name: 'inputmask',
+      component: AInputMaskView,
+    },
+    {
+      path: '/textarea',
+      name: 'textarea',
+      component: ATextAreaView,
       component: AInputMask,
     }
   ],
