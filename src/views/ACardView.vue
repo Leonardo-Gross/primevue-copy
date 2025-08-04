@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { SEVERITY } from '@Enums';
 import { AButton, ACard } from '@Atoms';
-import { ALayout} from '@Templates';
+import { ALayout} from '@Layouts';
 
 
 </script>
