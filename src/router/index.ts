@@ -6,6 +6,9 @@ import AInputMaskView from '../views/AInputMaskView.vue';
 import AInputTextView from '../views/AInputTextView.vue';
 import APanelView from '../views/APanelView.vue';
 import ATextAreaView from '../views/ATextAreaView.vue';
+ import ADividerView from '../views/ADividerView.vue'
+import AInputText from '../views/AInputTextView.vue';
+import AInputMask from '../views/AInputMaskView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +37,7 @@ const router = createRouter({
       path: '/inputtext',
       name: 'inputtext',
       component: AInputTextView,
+      component: AInputText,
     },
     {
       path: '/inputmask',
@@ -44,6 +48,7 @@ const router = createRouter({
       path: '/textarea',
       name: 'textarea',
       component: ATextAreaView,
+      component: AInputMask,
     }
   ],
 });

@@ -15,13 +15,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
-      '@Components': fileURLToPath(new URL('./src/components', import.meta.url)),
-
       '@Atoms': fileURLToPath(new URL('./src/components/atoms', import.meta.url)),
+      '@Components': fileURLToPath(new URL('./src/components', import.meta.url)),
+      '@Enums': fileURLToPath(new URL('./src/enums', import.meta.url)),
+      '@Interfaces': fileURLToPath(new URL('./src/interfaces', import.meta.url)),
       '@Molecules': fileURLToPath(new URL('./src/components/molecules', import.meta.url)),
       '@Organisms': fileURLToPath(new URL('./src/components/organisms', import.meta.url)),
-      '@Templates': fileURLToPath(new URL('./src/components/templates', import.meta.url)),
-      '@Enums': fileURLToPath(new URL('./src/enums', import.meta.url)),
+      '@Layouts': fileURLToPath(new URL('./src/components/layout', import.meta.url)),
       '@Types': fileURLToPath(new URL('./src/types', import.meta.url)),
     },
   },
