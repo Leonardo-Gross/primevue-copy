@@ -92,6 +92,7 @@ const load = async () => {
         class="card flex justify-center gap-4 rounded-lg border border-solid border-gray-200 bg-gray-50 p-5"
       >
         <AButton
+          class="text-black"
           label="Link"
           link
         />
