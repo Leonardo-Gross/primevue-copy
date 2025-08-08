@@ -43,6 +43,10 @@ const toggleSideBar = () => {
         <li class="mb-5"><RouterLink to="/inputtext">Input Text</RouterLink></li>
 
         <li class="mb-5"><RouterLink to="/inputmask">Input Mask</RouterLink></li>
+
+        <li class="mb-5"><RouterLink to="/textarea">Text Area</RouterLink></li>
+
+        <li class="mb-5"><RouterLink to="/landingpage">Landing Page</RouterLink></li>
       </ul>
     </div>
 
