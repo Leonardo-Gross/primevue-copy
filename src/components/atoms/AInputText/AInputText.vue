@@ -44,10 +44,10 @@ const filledClass = computed(() => [props.filled && 'bg-gray-100'])
 
 const sizeClass = computed(() =>
   props.size === 'small'
-    ? 'h-7 w-55 px-3 text-sm'
+    ? 'h-7 max-w-55 px-3 text-sm'
     : props.size === 'large'
-    ? 'h-11 w-75 px-5 text-lg'
-    : 'min-h-9 min-w-65 px-4 text-base'
+    ? 'h-11 max-w-75 px-5 text-lg'
+    : 'min-h-9 max-w-65 px-4 text-base'
 )
 
 // **Só considera a prop invalid explicitamente**

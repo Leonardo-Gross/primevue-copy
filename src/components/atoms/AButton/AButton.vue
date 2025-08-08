@@ -147,7 +147,7 @@ const buttonClasses = computed(() => ({
   'opacity-50 !cursor-not-allowed': props.disabled || isLoading.value,
   '!shadow-md/30': props.raised,
   'rounded-full': props.rounded,
-  'bg-transparent text-black font-medium hover:underline hover:bg-white': props.link,
+  'bg-transparent font-medium hover:underline hover:bg-trasparent': props.link,
   rounded: !props.rounded && !inGroup,
   'border border-l-0 first:border-l': inGroup && props.variant !== 'text',
   'first:rounded-l last:rounded-r rounded-none': inGroup,
